@@ -1,6 +1,6 @@
 # E-Exams - Système de gestion des examens
 
-![cover.png](./src/assets/cover.png)
+![cover.png](./e-exams/src/assets/cover.png)
 
 ## Qu'est-ce que E-Exams ?
 
