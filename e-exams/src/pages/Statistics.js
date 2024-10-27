@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { Bar, Pie, Doughnut, Line } from 'react-chartjs-2';
+import { Bar, Pie, Doughnut } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
-import LeftSidebar from '../components/LeftSidebar'; 
+import LeftSidebar from '../components/LeftSidebar';
 
-//fonts 
+// Fonts and Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faCalendarAlt, faHistory, faChartLine, faCog, faEnvelope, faDownload } from "@fortawesome/free-solid-svg-icons";
-//pdf
+// PDF Export
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
-// Enregistrement des composants Chart.js
+// Register Chart.js components
 Chart.register(...registerables);
 
 export const Statistics = () => {
@@ -30,7 +30,7 @@ export const Statistics = () => {
     Anglais: {
       barData: [9, 8, 12, 9, 15],
       pieData: [30, 70],
-      doughnutData: [5, 30,10, 65],
+      doughnutData: [5, 30, 10, 65],
     },
   };
 
@@ -42,12 +42,11 @@ export const Statistics = () => {
 
   const handleDownloadPdf = () => {
     const doc = new jsPDF();
-
     const examTitle = `Rapport de l'examen - ${selectedSubject}`;
     doc.setFontSize(16);
-    doc.text(examTitle, 20, 20); 
+    doc.text(examTitle, 20, 20);
     doc.autoTable({
-      startY: 30, 
+      startY: 30,
       head: [['Examen', 'Score']],
       body: [
         ['CC1', subjectData[selectedSubject].barData[0]],
@@ -60,11 +59,11 @@ export const Statistics = () => {
 
     // Save PDF 
     doc.save(`${selectedSubject}_rapport.pdf`);
-};
-
+  };
 
   return (
     <div className="flex h-screen">
+      {/* Sidebar */}
       <div className="w-1/6 flex-shrink-0">
         <LeftSidebar activeChild={activeChild}>
           <div href="/home" name="Accueil" icon={<FontAwesomeIcon icon={faHome} />} />
@@ -76,7 +75,8 @@ export const Statistics = () => {
         </LeftSidebar>
       </div>
 
-      <main className="flex-grow p-4 ml-20 mt-[10px]">
+      {/* Main Content */}
+      <main className="flex-grow p-4">
         <div className="mb-4 flex flex-col items-start">
           <label htmlFor="subject" className="mb-2 font-semibold">Sélectionner la matière :</label>
           <select
@@ -91,6 +91,7 @@ export const Statistics = () => {
           </select>
         </div>
 
+        {/* Download PDF Button */}
         <div className="mb-4">
           <button
             onClick={handleDownloadPdf}
@@ -100,11 +101,14 @@ export const Statistics = () => {
           </button>
         </div>
 
+        {/* Class Rank */}
         <div className="mb-4 text-lg font-semibold">
           Rang dans la classe : <span className="text-[#6366f1]">5ème</span>
         </div>
 
+        {/* Charts */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {/* Bar Chart */}
           <div className="bg-white shadow-lg p-4 rounded-lg transition-transform transform hover:scale-105">
             <h3 className="font-semibold mb-2 text-lg">Scores par mois - {selectedSubject}</h3>
             <Bar
@@ -122,6 +126,7 @@ export const Statistics = () => {
             />
           </div>
 
+          {/* Pie Chart */}
           <div className="bg-white shadow-lg p-4 rounded-lg transition-transform transform hover:scale-105">
             <h3 className="font-semibold mb-2 text-lg">Répartition Réussi/Échoué - {selectedSubject}</h3>
             <Pie
@@ -138,6 +143,7 @@ export const Statistics = () => {
             />
           </div>
 
+          {/* Doughnut Chart */}
           <div className="bg-white shadow-lg p-4 rounded-lg transition-transform transform hover:scale-105">
             <h3 className="font-semibold mb-2 text-lg">Répartition des performances - {selectedSubject}</h3>
             <Doughnut

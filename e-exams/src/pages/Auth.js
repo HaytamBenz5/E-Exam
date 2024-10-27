@@ -25,7 +25,7 @@ export function Auth() {
   };
 
   const handleFaceIdClick = () => {
-    setIsSwapped(!isSwapped);
+    setIsSwapped(!isSwapped); // Optional: keeps the Face ID swapped state behavior
   };
 
 
@@ -87,14 +87,14 @@ export function Auth() {
                         Conserver ma session
                       </label>
                     </div>
-                    <Link to="/signup" className="text-indigo-600 hover:text-[#ff6e54]">
+                    <Link to="/signup" className="text-indigo-600">
                       Créer un Compte 
                     </Link>
                   </div>
 
                   {/* Buttons */}
                   <div>
-                    <button onClick={onSubmit}  className="w-full py-3 mb-4 bg-indigo-600 hover:bg-[#c9452e] text-white text-sm font-bold uppercase tracking-widest rounded-lg">
+                    <button onClick={onSubmit}  className="w-full py-3 mb-4 bg-indigo-600 hover:bg-indigo-800 text-white text-sm font-bold uppercase tracking-widest rounded-lg">
                       S'identifier
                     </button>
                     <button

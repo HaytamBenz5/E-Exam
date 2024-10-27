@@ -3,8 +3,9 @@ import "./App.css";
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-// Import the AuthProvider
+// Import the AuthProvider and ExamAccessProvider
 import { AuthProvider } from "./contexts/AuthContext";
+import { ExamAccessProvider } from "./contexts/ExamAccessContext";
 
 // Router pages
 import { Home } from "./pages/Home";
@@ -20,19 +21,21 @@ import { Profile } from "./pages/Profile";
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <Routes>
-          <Route path="/home" element={<Home />} />
-          <Route path="/stats" element={<Statistics />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/" element={<Auth />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/pre-exam" element={<PreExam />} />
-          <Route path="/exam" element={<Exam />} />
-          <Route path="/profile" element={<Profile />} />
-          {/* <Route path="*" element={<NotFound />} /> Catch all unmatched routes */}
-        </Routes>
-      </Router>
+      <ExamAccessProvider>
+        <Router>
+          <Routes>
+            <Route path="/home" element={<Home />} />
+            <Route path="/stats" element={<Statistics />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/" element={<Auth />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/pre-exam" element={<PreExam />} />
+            <Route path="/exam/:id" element={<Exam />} />{" "}
+            {/* Route avec paramètre d'ID */}
+            <Route path="/profile" element={<Profile />} />
+          </Routes>
+        </Router>
+      </ExamAccessProvider>
     </AuthProvider>
   );
 }

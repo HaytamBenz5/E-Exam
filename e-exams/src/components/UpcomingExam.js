@@ -3,22 +3,23 @@ import CardExam from './CardExam';
 
 const UpcomingExam = ({ title, link, exams }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [visibleExams, setVisibleExams] = useState(3);
+  const [visibleExams, setVisibleExams] = useState(3); // Default to 3 exams for larger screens
 
   useEffect(() => {
+    // Function to handle screen resizing and set the number of visible exams
     const handleResize = () => {
       if (window.innerWidth < 640) {
-        setVisibleExams(1); 
+        setVisibleExams(1); // Show 1 exam on small screens
       } else if (window.innerWidth < 1024) {
-        setVisibleExams(3); 
+        setVisibleExams(3); // Show 2 exams on medium screens
       } else {
-        setVisibleExams(4);
+        setVisibleExams(4); // Show 3 exams on larger screens
       }
     };
 
-    handleResize(); 
-    window.addEventListener('resize', handleResize); 
-    return () => window.removeEventListener('resize', handleResize);
+    handleResize(); // Run on component mount
+    window.addEventListener('resize', handleResize); // Listen for resize events
+    return () => window.removeEventListener('resize', handleResize); // Cleanup listener on unmount
   }, []);
 
   const handleNext = () => {
@@ -38,7 +39,7 @@ const UpcomingExam = ({ title, link, exams }) => {
       {/* Title and link */}
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-bold">{title}</h2>
-        <a href={link} className="text-sm text-orange-500">voir plus &gt;</a>
+        <a href={link} className="text-sm text-orange-500 hover:underline">voir plus &gt;</a>
       </div>
 
       {/* Cards Container */}
@@ -54,7 +55,7 @@ const UpcomingExam = ({ title, link, exams }) => {
             <div
               className="p-2"
               key={index}
-              style={{ flex: `0 0 ${100 / visibleExams}%` }} 
+              style={{ flex: `0 0 ${100 / visibleExams}%` }} // Make each card responsive
             >
               <CardExam
                 name={exam.name}
@@ -72,14 +73,14 @@ const UpcomingExam = ({ title, link, exams }) => {
         <button
           onClick={handlePrev}
           disabled={currentIndex === 0}
-          className="bg-gray-300 p-2 rounded-full mx-2 disabled:opacity-50"
+          className="bg-gray-300 p-2 rounded-full mx-2 disabled:opacity-50 hover:bg-gray-400 transition duration-150"
         >
           &lt;
         </button>
         <button
           onClick={handleNext}
           disabled={currentIndex >= exams.length - visibleExams}
-          className="bg-gray-300 p-2 rounded-full mx-2 disabled:opacity-50"
+          className="bg-gray-300 p-2 rounded-full mx-2 disabled:opacity-50 hover:bg-gray-400 transition duration-150"
         >
           &gt;
         </button>

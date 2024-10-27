@@ -3,7 +3,7 @@ import {
   AiOutlineLeft,
   AiOutlineRight,
   AiOutlineCheckCircle,
-} from "react-icons/ai"; // Icons for the arrows and check
+} from "react-icons/ai";
 import Logo from "../assets/icons/logo.png";
 
 const ExamLeftSideBar = ({
@@ -12,7 +12,6 @@ const ExamLeftSideBar = ({
   onNext,
   validatedQuestions,
 }) => {
-  // Assigner des couleurs spécifiques à chaque question
   const questionColors = {
     1: "bg-[#e9634c]", // Rouge
     2: "bg-[#88d347]", // Vert clair
@@ -26,12 +25,12 @@ const ExamLeftSideBar = ({
     <div className="fixed top-0 left-0 w-full h-full sm:w-64 bg-white shadow-lg m-[6px] rounded-lg">
       <div className="flex flex-col h-full justify-between py-6">
         {/* Logo Section */}
-
         <div className="h-20 flex items-center px-8 mb-10 ml-4">
           <a href="javascript:void(0)" className="flex-none">
             <img src={Logo} width={160} className="mx-auto" alt="Logo" />
           </a>
         </div>
+
         {/* Questions Section */}
         <div className="flex flex-col space-y-4 px-4 gap-3">
           {[1, 2, 3, 4, 5, 6].map((id) => (
@@ -41,7 +40,6 @@ const ExamLeftSideBar = ({
               onClick={() => onQuestionClick(id)}
             >
               {`Question ${id}`}
-              {/* Affiche une coche si la question est validée */}
               {validatedQuestions.includes(id) && (
                 <AiOutlineCheckCircle className="text-white text-xl" />
               )}
@@ -50,7 +48,7 @@ const ExamLeftSideBar = ({
         </div>
 
         {/* Arrows Section */}
-        <div className="flex justify-center space-x-4">
+        <div className="flex justify-center space-x-4 mt-6">
           <button
             className="bg-black text-white p-2 rounded-full"
             onClick={onPrev}

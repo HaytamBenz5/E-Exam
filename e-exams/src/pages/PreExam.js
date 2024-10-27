@@ -1,20 +1,23 @@
 import React from "react";
-import { useNavigate } from "react-router-dom"; // Importer le hook useNavigate
+import { useNavigate } from "react-router-dom";
 import LeftSideBar from "../components/LeftSidebar";
 import RightSideBar from "../components/RightSideBar";
 import preExamImage from "../assets/images/pre-exam.png";
+import { useExamAccess } from "../contexts/ExamAccessContext"; // Import du contexte
 
 export function PreExam() {
-  const navigate = useNavigate(); // Initialiser le hook useNavigate
+  const navigate = useNavigate();
+  const { setHasAccess } = useExamAccess(); // Accéder à setHasAccess pour donner l'accès
 
   const handleStartClick = () => {
-    navigate("/exam"); // Redirige vers la page /exam
+    setHasAccess(true); // Donner l'accès à la page Exam
+    navigate("/exam/1"); // Redirige vers la première question de l'examen
   };
 
   return (
     <div className="mainHolder bg-[#f5f5f5] h-screen flex relative">
       {/* Left Sidebar */}
-      <div className="w-[307px]">
+      <div className="w-[225px]">
         <LeftSideBar />
       </div>
 
@@ -55,7 +58,7 @@ export function PreExam() {
             {/* Bouton "Commençons" avec la redirection */}
             <button
               className="bg-[#5680d8] text-white px-6 py-2 rounded-lg hover:bg-[#365899] w-48"
-              onClick={handleStartClick} // Redirection lors du clic
+              onClick={handleStartClick} // Redirection vers /exam/1 lors du clic
             >
               Commençons
             </button>

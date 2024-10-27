@@ -3,6 +3,7 @@ import Select from 'react-select';
 import RightSidebar from "../components/RightSideBar";
 import LeftSidebar from "../components/LeftSidebar.js";
 import Header from "../components/Header";
+import { useAuth } from '../contexts/AuthContext';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faCalendarAlt, faHistory, faChartLine, faCog, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
@@ -12,8 +13,6 @@ const PlansIcon = () => <FontAwesomeIcon icon={faHistory} />;
 const TransactionsIcon = () => <FontAwesomeIcon icon={faChartLine} />;
 const SettingsIcon = () => <FontAwesomeIcon icon={faCog} />;
 const ContactIcon = () => <FontAwesomeIcon icon={faEnvelope} />;
-
-const name = "";
 
 const countryOptions = [
     { value: "+93", label: "AF (+93)" },
@@ -206,6 +205,8 @@ const countryOptions = [
 export function Contact() {
   const activeChild = 'Contact';
 
+  const { userName, logout } = useAuth();
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -275,7 +276,7 @@ export function Contact() {
       </div>
 
       <div className="flex flex-col p-[10px] w-[1200px] ml-[70px]">
-        <Header name={name} />
+        <Header name={userName} />
         <div className="isolate bg-white px-6 py-24 sm:py-32 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Nous Contacter</h2>
@@ -378,7 +379,7 @@ export function Contact() {
                 </div>
 
               {/* Message */}
-              <div className="sm:col-span-2">
+              <div className="sm:col-span-2 mt-4">
                 <label htmlFor="message" className="block text-sm font-semibold leading-6 text-gray-900">
                   Message <span className="text-red-500">*</span>
                 </label>
@@ -419,7 +420,7 @@ export function Contact() {
               </div>
             </div>
 
-            <div className="mt-10">
+            <div className="mt-5">
               <button
                 type="submit"
                 className="w-10px rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"

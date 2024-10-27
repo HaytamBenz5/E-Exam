@@ -91,7 +91,7 @@ export function Profile() {
               <div className="flex justify-center gap-20 align-items-start">
                 <div className="flex flex-col flex-1">
                   <span className="mb-2 text-black text-lg font-semibold">Nom</span>
-                  <span className="bg-gray-200 p-2 rounded-lg text-gray-600">ELJILY</span>
+                  <span className="bg-gray-200 p-2 rounded-lg text-gray-600">{userName}</span>
                 </div>
                 <div className="flex flex-col flex-1">
                   <span className="mb-2 text-black text-lg font-semibold">Prénom</span>
